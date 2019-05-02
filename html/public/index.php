@@ -1,8 +1,9 @@
 <?php
     try {
         $dbh = new PDO('mysql:host=mysql;port=3306;', 'root', 'root');
-        print_r($dbh);
-        $dbh = null;
+        echo '<pre>';
+        var_dump($dbh, [1,2,3]);
+        echo '</pre>';
     } catch (PDOException $e) {
         echo "Error!: " . $e->getMessage() . "<br/>";
         die();

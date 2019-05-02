@@ -60,6 +60,8 @@ services:
     volumes:
       - dbdata:/var/lib/mysql/
       - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - code-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -68,9 +70,11 @@ services:
     tty: true
     links:
       - mysql:db
-    ports:
-      - "81:80"
+      - nginx-proxy
     environment:
+      - VIRTUAL_HOST=phpmyadmin.local
       - PMA_USER=root
       - PMA_PASSWORD=root
       - PHP_UPLOAD_MAX_FILESIZE=100MB
+    networks:
+      - code-network
